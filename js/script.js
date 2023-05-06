@@ -1,7 +1,7 @@
 const outPut = document.getElementById('output')
-
+const outPutCal = document.getElementById('outputCal')
 // Default Array:
-const numbers = [];
+let numbers = [];
 
 // Thêm phần tử vào mảng
 const addBtn = document.getElementById('addBtn').onclick = function () {
@@ -28,8 +28,23 @@ const minPosBtn = document.getElementById('minPositiveBtn').onclick = function()
     MinPosNumber();
 }
 
+// So chan dau tien trong mang
+const evenLastestBtn = document.getElementById('evenLastestBtn').onclick = function () {
+    evenLastest()
+}
+
+// Sap xep phan tu tang dan
+const ascendSortBtn = document.getElementById('ascendSortBtn').onclick = function () {
+
+}
+
+// Clear
+const clearBtn = document.getElementById('clearBtn').onclick = function () {
+    ClearInput();
+}
 
 // FUNCTION:
+// Add to array
 function Add() {
     const input = document.getElementById('inputNumber').value;
     numbers.push(input);
@@ -44,7 +59,8 @@ function SumPositive() {
             sum += parseInt(numbers[j]);
         }
     }
-    console.log(sum)
+    outPutCal.textContent = `sum: ` + sum;
+
 }
 
 function CountPositive() {
@@ -56,6 +72,8 @@ function CountPositive() {
         }
     }
     console.log(total)
+    outPutCal.textContent = total;
+
 }
 
 
@@ -76,4 +94,24 @@ function MinPosNumber(){
         }
     }
     console.log(minPos)
+}
+
+function findLastEven() {
+    for (let i = numbers.length - 1; i >= 0; i--) {
+        if (numbers[i] % 2 === 0) {
+            return numbers[i];
+        }
+    }
+    return -1;
+}
+
+function evenLastest () {
+    const lasteven = findLastEven(numbers)
+    console.log(lasteven)
+}
+
+function ClearInput() {
+    numbers = []
+    console.log(numbers)
+    outPut.textContent = numbers;
 }
