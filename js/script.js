@@ -1,13 +1,12 @@
-// Default Array:
-let numbers = [];
-outPut.textContent = numbers
-let numbers2 = [];
-outPut2.textContent = numbers2
-
 // Default Show Array as outPut, Result as outPutCal 
 const outPut = document.getElementById('output')
 const outPutCal = document.getElementById('outputCal')
 
+// Default Array:
+let numbers = [2, 3, 4, 5];
+outPut.textContent = numbers
+let numbers2 = [];
+outPut2.textContent = numbers2
 
 // FUNCTION:
 /** Clear Button */
@@ -116,23 +115,16 @@ function evenLastest() {
 
 /** 6. Đổi chỗ 2 giá trị trong mảng theo vị trí (Cho nhập vào 2 vị trí muốn đổi chỗ giá trị). */
 function swapValues() {
-    var input1 = document.getElementById("input1");
-    var input2 = document.getElementById("input2");
-    var temp = input1.value;
-    var value1 = parseInt(input1.value);
-    var value2 = parseInt(input2.value);
-    // check giá trị trong input có trong mảng không
-    if (isNaN(value1) || isNaN(value2) || !numbers.includes(value1) || !numbers.includes(value2)) {
-        alert("Invalid input values. Please enter valid numbers from the array.");
-        return;
+    var input1 = parseInt(document.getElementById("input1").value);
+    var input2 = parseInt(document.getElementById("input2").value);
+    // Thực hiện hoán đổi giá trị của 2 vị trí trong mảng
+    if (input1 < 0 || input1 >= numbers.length || input2 < 0 || input2 >= numbers.length) {
+        alert("Invalid position or the Array now is empty!");
+        return
     }
-    var index1 = numbers.indexOf(value1);
-    var index2 = numbers.indexOf(value2);
-    var temp = numbers[index1];
-    numbers[index1] = numbers[index2];
-    numbers[index2] = temp;
-    input1.value = value2;
-    input2.value = value1;
+
+    [numbers[input1], numbers[input2]] = [numbers[input2], numbers[input1]];
+
     outPutCal.textContent = `New Array: ` + numbers;
 }
 
