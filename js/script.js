@@ -1,12 +1,29 @@
-const outPut = document.getElementById('output')
-const outPutCal = document.getElementById('outputCal')
 // Default Array:
-let numbers = [4, 6, 8, 9];
+let numbers = [];
 outPut.textContent = numbers
-
 let numbers2 = [];
 outPut2.textContent = numbers2
+
+// Default Show Array as outPut, Result as outPutCal 
+const outPut = document.getElementById('output')
+const outPutCal = document.getElementById('outputCal')
+
+
 // FUNCTION:
+/** Clear Button */
+function ClearInput() {
+    numbers = []
+    console.log(numbers)
+    outPut.textContent = numbers;
+}
+
+function ClearInput2() {
+    numbers2 = []
+    console.log(numbers2)
+    outPutCal2.textContent = "";
+    outPut2.textContent = numbers2;
+}
+
 /** Add Button */
 function Add() {
     const input = document.getElementById('inputNumber').value;
@@ -28,7 +45,7 @@ function Count() {
         Number.isInteger(numbers2[i]) && number++;
     }
 
-    outPutCal2.textContent= `Integer Count: ` + number
+    outPutCal2.textContent = `Integer Count: ` + number
 }
 
 /** Hàm tìm số Dương */
@@ -43,14 +60,10 @@ function FindPositiveNumber() {
     return positive_numbers;
 }
 
-/** Tổng các số dương */
+/** 1. Tổng các số dương trong mảng. */
 function SumPositive() {
     let sum = 0;
-
-    // nhap mang so duong vao posNumber
     var posNumber = FindPositiveNumber()
-
-    // Duyet lay cac phan tu trong mang roi cong lai
     for (let j = 0; j < posNumber.length; j++) {
         sum += parseFloat(posNumber[j])
     }
@@ -59,7 +72,7 @@ function SumPositive() {
 
 }
 
-/** Đếm các số dương */
+/** 2. Đếm có bao nhiêu số dương trong mảng. */
 function CountPositive() {
     let total = 0;
     var posNumber = FindPositiveNumber()
@@ -67,14 +80,14 @@ function CountPositive() {
     outPutCal.textContent = `Total Positive Numbers: ` + total;
 }
 
-/** Tìm số nhỏ nhất trong mảng */
+/** 3. Tìm số nhỏ nhất trong mảng */
 function MinNumbers() {
     const minNum = Math.min(...numbers)
     outPutCal.textContent = `Min Numbers: ` + minNum;
     console.log(minNum)
 }
 
-/** Tìm số chẵn nhỏ nhất */
+/** 4. Tìm số dương nhỏ nhất trong mảng */
 function MinPosNumber() {
     var posNumber = FindPositiveNumber();
     for (let i = 0; i < posNumber.length; i++) {
@@ -85,7 +98,7 @@ function MinPosNumber() {
     }
 }
 
-/** Tìm số chẵn cuối cùng trong mảng */
+/** 5. Tìm số chẵn cuối cùng trong mảng. Nếu mảng không có giá trị chẵn thì trả về -1. */
 function findLastEven() {
     for (let i = numbers.length - 1; i >= 0; i--) {
         if (numbers[i] % 2 === 0) {
@@ -101,23 +114,29 @@ function evenLastest() {
     outPutCal.textContent = `Lastest even Number: ` + lasteven;
 }
 
-/** Clear Button */
-function ClearInput() {
-    numbers = []
-    console.log(numbers)
-    outPut.textContent = numbers;
+/** 6. Đổi chỗ 2 giá trị trong mảng theo vị trí (Cho nhập vào 2 vị trí muốn đổi chỗ giá trị). */
+function swapValues() {
+    var input1 = document.getElementById("input1");
+    var input2 = document.getElementById("input2");
+    var temp = input1.value;
+    var value1 = parseInt(input1.value);
+    var value2 = parseInt(input2.value);
+    // check giá trị trong input có trong mảng không
+    if (isNaN(value1) || isNaN(value2) || !numbers.includes(value1) || !numbers.includes(value2)) {
+        alert("Invalid input values. Please enter valid numbers from the array.");
+        return;
+    }
+    var index1 = numbers.indexOf(value1);
+    var index2 = numbers.indexOf(value2);
+    var temp = numbers[index1];
+    numbers[index1] = numbers[index2];
+    numbers[index2] = temp;
+    input1.value = value2;
+    input2.value = value1;
+    outPutCal.textContent = `New Array: ` + numbers;
 }
 
-function ClearInput2() {
-    numbers2 = []
-    console.log(numbers2)
-    outPutCal2.textContent = "";
-    outPut2.textContent = numbers2;
-}
-
-/** Sắp xếp các thứ tự tăng dần
-* dùng hàm sort()
-*/
+/** 7. Sắp xếp mảng theo thứ tự tăng dần */
 function AscendSort() {
     console.log(numbers.sort())
     outPutCal.textContent = `Ascend of array: ` + numbers.sort();
@@ -147,26 +166,22 @@ function isPrime(num) {
     return true;
 }
 
-/** SWAP */
-function swapValues() {
-    var input1 = document.getElementById("input1");
-    var input2 = document.getElementById("input2");
-    var temp = input1.value;
-    var value1 = parseInt(input1.value);
-    var value2 = parseInt(input2.value);
-    // check giá trị trong input có trong mảng không
-    if (isNaN(value1) || isNaN(value2) || !numbers.includes(value1) || !numbers.includes(value2)) {
-        alert("Invalid input values. Please enter valid numbers from the array.");
-        return;
+/** 10 */
+function CountPositiveNegative() {
+    var countPositive = 0;
+    var countNegative = 0;
+    for (var i = 0; i < numbers.length; i++) {
+        if (numbers[i] > 0) {
+            countPositive++;
+        } else if (numbers[i] < 0) {
+            countNegative++;
+        }
     }
-    var index1 = numbers.indexOf(value1);
-    var index2 = numbers.indexOf(value2);
-    var temp = numbers[index1];
-    numbers[index1] = numbers[index2];
-    numbers[index2] = temp;
-    input1.value = value2;
-    input2.value = value1;
-    outPutCal.textContent = `New Array: ` + numbers;
+    if (countPositive > countNegative) {
+        outPutCal.textContent = countPositive + " positive numbers, which is more than " + countNegative + " negative numbers";
+    } else if (countPositive < countNegative) {
+        outPutCal.textContent = countNegative + " negative numbers, which is more than " + countPositive + " positive numbers";
+    } else {
+        outPutCal.textContent = "The number of positive and negative numbers is equal";
+    }
 }
-
-/**  */
